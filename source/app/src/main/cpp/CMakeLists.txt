@@ -19,6 +19,51 @@ add_library( # Sets the name of the library.
              # Provides a relative path to your source file(s).
              native-lib.cpp )
 
+#ffmpeg library
+add_library( avcodec
+        SHARED
+        IMPORTED)
+set_target_properties( avcodec
+        PROPERTIES IMPORTED_LOCATION
+        ${CMAKE_SOURCE_DIR}/../jniLibs/armeabi-v7a/libavcodec.so)
+
+add_library( avfilter
+        SHARED
+        IMPORTED)
+set_target_properties( avfilter
+        PROPERTIES IMPORTED_LOCATION
+        ${CMAKE_SOURCE_DIR}/../jniLibs/armeabi-v7a/libavfilter.so)
+
+add_library( avformat
+        SHARED
+        IMPORTED)
+set_target_properties( avformat
+        PROPERTIES IMPORTED_LOCATION
+        ${CMAKE_SOURCE_DIR}/../jniLibs/armeabi-v7a/libavformat.so)
+
+add_library( avutil
+        SHARED
+        IMPORTED)
+set_target_properties( avutil
+        PROPERTIES IMPORTED_LOCATION
+        ${CMAKE_SOURCE_DIR}/../jniLibs/armeabi-v7a/libavutil.so)
+
+add_library( swresample
+        SHARED
+        IMPORTED)
+set_target_properties( swresample
+        PROPERTIES IMPORTED_LOCATION
+        ${CMAKE_SOURCE_DIR}/../jniLibs/armeabi-v7a/libswresample.so)
+
+add_library( swscale
+        SHARED
+        IMPORTED)
+set_target_properties( swscale
+        PROPERTIES IMPORTED_LOCATION
+        ${CMAKE_SOURCE_DIR}/../jniLibs/armeabi-v7a/libswscale.so)
+
+include_directories(${CMAKE_SOURCE_DIR}/../jniLibs/include)
+
 # Searches for a specified prebuilt library and stores the path as a
 # variable. Because CMake includes system libraries in the search path by
 # default, you only need to specify the name of the public NDK library
@@ -38,7 +83,12 @@ find_library( # Sets the name of the path variable.
 
 target_link_libraries( # Specifies the target library.
                        native-lib
-
+        avcodec
+        avfilter
+        avformat
+        avutil
+        swresample
+        swscale
                        # Links the target library to the log library
                        # included in the NDK.
                        ${log-lib} )

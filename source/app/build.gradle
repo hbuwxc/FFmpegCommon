@@ -33,6 +33,11 @@ android {
             version "3.10.2"
         }
     }
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['src/main/jniLibs'] //set .so files location to libs instead of jniLibs
+        }
+    }
 }
 
 dependencies {
